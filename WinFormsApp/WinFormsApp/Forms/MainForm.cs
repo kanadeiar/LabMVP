@@ -1,4 +1,6 @@
-﻿namespace WinFormsApp.Forms;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace WinFormsApp.Forms;
 
 public partial class MainForm : Form
 {
