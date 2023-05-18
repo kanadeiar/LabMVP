@@ -22,6 +22,8 @@ namespace WinFormsApp
         private static void InitServices(IServiceCollection services)
         {
             services.ProgramRegister().InfraRegister().CoreRegister();
+
+            //services.AddSingleton<IServiceProvider>(Program.Services);
         }
 
         [STAThread]
