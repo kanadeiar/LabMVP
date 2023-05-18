@@ -1,33 +1,35 @@
-namespace WinFormsApp;
+using Microsoft.Extensions.DependencyInjection;
+using WinFormsApp.Configs;
+using WinFormsApp.Core.Configs;
+using WinFormsApp.Forms;
+using WinFormsApp.Infra.Configs;
 
-public static class Program
+namespace WinFormsApp
 {
-    #region Контейнер внедрения зависимостей
-
-    private static IServiceProvider? _services;
-    /// <summary> Сервис-провайдер </summary>
-    public static IServiceProvider Services => _services ??= GetServices().BuildServiceProvider();
-    private static IServiceCollection GetServices()
+    internal static class Program
     {
-        var services = new ServiceCollection();
-        InitServices(services);
-        return services;
-    }
-    private static void InitServices(IServiceCollection services)
-    {
-        services.AddScoped<MainForm>();
-        
-        services.AddScoped<ICounter, Counter>();
+        private static IServiceProvider? _services;
+        /// <summary>
+        /// Services of application
+        /// </summary>
+        public static IServiceProvider Services => _services ??= GetServices().BuildServiceProvider();
+        private static IServiceCollection GetServices()
+        {
+            var services = new ServiceCollection();
+            InitServices(services);
+            return services;
+        }
+        private static void InitServices(IServiceCollection services)
+        {
+            services.ProgramRegister().InfraRegister().CoreRegister();
+        }
 
-    }
-
-    #endregion
-
-    [STAThread]
-    static void Main()
-    {
-        ApplicationConfiguration.Initialize();
-        var form = Services.GetRequiredService<MainForm>();
-        Application.Run(form);
+        [STAThread]
+        static void Main()
+        {
+            ApplicationConfiguration.Initialize();
+            var form = Services.GetRequiredService<MainForm>();
+            Application.Run(form);
+        }
     }
 }

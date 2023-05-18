@@ -1,21 +1,14 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace WinFormsApp.Forms;
-
-public partial class MainForm : Form
+namespace WinFormsApp.Forms
 {
-    private readonly ICounter _counter;
-    public MainForm(ICounter counter)
+    public partial class MainForm : Form
     {
-        _counter = counter;
-
-        InitializeComponent();
-    }
-
-    private void btnCounter_Click(object sender, EventArgs e)
-    {
-        _counter.Count++;
-        lblCounter.Text = _counter.Count.ToString();
+        private readonly IServiceCollection _services;
+        public MainForm(IServiceCollection services)
+        {
+            _services = services;
+            InitializeComponent();
+        }
     }
 }
-
