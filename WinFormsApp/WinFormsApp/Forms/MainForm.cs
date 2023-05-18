@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using WinFormsApp.Core.Abstracts;
 using WinFormsApp.Core.Models;
+using WinFormsApp.Infra.Abstracts;
 
 namespace WinFormsApp.Forms
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form, IMainFormView
     {
         private readonly IServiceProvider _services;
         private readonly Counter _counter;

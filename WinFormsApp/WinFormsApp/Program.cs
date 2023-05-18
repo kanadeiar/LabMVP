@@ -2,7 +2,9 @@ using Microsoft.Extensions.DependencyInjection;
 using WinFormsApp.Configs;
 using WinFormsApp.Core.Configs;
 using WinFormsApp.Forms;
+using WinFormsApp.Infra.Abstracts;
 using WinFormsApp.Infra.Configs;
+using WinFormsApp.Infra.Presenters;
 
 namespace WinFormsApp
 {
@@ -23,15 +25,15 @@ namespace WinFormsApp
         {
             services.ProgramRegister().InfraRegister().CoreRegister();
 
-            //services.AddSingleton<IServiceProvider>(Program.Services);
+
         }
 
         [STAThread]
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            var form = Services.GetRequiredService<MainForm>();
-            Application.Run(form);
+            Services.GetRequiredService<MainFormPresenter>().Run();
+            Application.Run(Services.GetRequiredService<ApplicationContext>());
         }
     }
 }
