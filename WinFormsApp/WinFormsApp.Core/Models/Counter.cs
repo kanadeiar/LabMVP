@@ -1,12 +1,13 @@
-﻿namespace WinFormsApp.Core.Models
-{
-    public class Counter
-    {
-        public int Count { get; set; }
+﻿using WinFormsApp.Core.Abstracts;
 
-        public void AddCount(int count)
-        {
-            Count += count;
-        }
+namespace WinFormsApp.Core.Models;
+
+public class Counter : ICounter
+{
+    public int Count { get; set; }
+
+    public void AddCount(int count)
+    {
+        Count += count;
     }
 }
